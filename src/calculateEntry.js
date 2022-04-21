@@ -19,13 +19,10 @@ function countEntrants(entrants) {
   return related;
 }
 
-function calculateEntry(entrants = {}) {
-  if (Object.keys(entrants).length === 0 || !entrants) return 0;
-
+function calculateEntry(entrants) {
+  if (!entrants || !Object.keys(entrants).length) return 0;
   const { adult: x, child: y, senior: z } = countEntrants(entrants);
-  const totalPrice = adult * x + child * y + senior * z;
-
-  return totalPrice;
+  return adult * x + child * y + senior * z;
 }
 
 module.exports = { calculateEntry, countEntrants };
