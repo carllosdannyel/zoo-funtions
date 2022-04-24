@@ -28,26 +28,26 @@ function sortedAllAnimals(options) {
   }, {});
 }
 
-// function sortedMaleOrFemale(options) {
-//   return species.reduce((acc, { location }) => {
-//     acc[location] = species.filter((locations) => locations.location
-//       .includes(location)).reduce((acc1, { name }) => {
-//       // const chave = name;
-//       const object = {};
-//       if (!options.sorted) {
-//         object[name] = species.filter((names) => names.name.includes(name))
-//           .flatMap((resident) => resident.residents).flatMap((names) => names.name);
-//         acc1.push(object);
-//         return acc1;
-//       }
-//       object[name] = species.filter((names) => names.name.includes(name))
-//         .flatMap((resident) => resident.residents).flatMap((names) => names.name).sort();
-//       acc1.push(object);
-//       return acc1;
-//     }, []);
-//     return acc;
-//   }, {});
-// }
+const sortedMaleOrFemale = (options) => species.reduce((acc, { location }) => {
+  acc[location] = species.filter((locations) => locations.location.includes(location))
+    .reduce((acc1, { name }) => {
+      const object = {};
+      if (!options.sorted) {
+        object[name] = species.filter((names) => names.name.includes(name))
+          .flatMap((resident) => resident.residents)
+          .filter((sex) => sex.sex.includes(options.sex)).flatMap((names) => names.name);
+        acc1.push(object);
+        return acc1;
+      }
+      object[name] = species.filter((names) => names.name.includes(name))
+        .flatMap((resident) => resident.residents)
+        .filter((sex) => sex.sex.includes(options.sex)).flatMap((names) => names.name)
+        .sort();
+      acc1.push(object);
+      return acc1;
+    }, []);
+  return acc;
+}, {});
 
 // const speciesNames = (acc1, { name }) => {
 //   // const chave = name;
@@ -64,19 +64,19 @@ function sortedAllAnimals(options) {
 //   return acc;
 // };
 
-function getAnimalMap(options) {
-  if (!options || options.sex) {
-    return species.reduce(withoutParameter, {});
+function getAnimalMap(options = {}) {
+  if (options.includeNames && options.sex) {
+    return sortedMaleOrFemale(options);
   }
-
   if (options.includeNames) {
     return sortedAllAnimals(options);
   }
+  return species.reduce(withoutParameter, {});
   // if (options.includeNames options.sex) {
   //   ascascasc
   // }
 }
 
-console.log(getAnimalMap({ includeNames: true }));
+console.log(getAnimalMap({ includeNames: true, sex: 'female', sorted: true }).NW);
 
 module.exports = getAnimalMap;
