@@ -72,7 +72,6 @@ function getAnimalMap(options) {
   if (options.includeNames) {
     return sortedAllAnimals(options);
   }
-
   // if (options.includeNames options.sex) {
   //   ascascasc
   // }
