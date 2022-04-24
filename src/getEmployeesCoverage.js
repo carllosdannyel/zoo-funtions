@@ -1,7 +1,12 @@
 const data = require('../data/zoo_data');
 
-function getEmployeesCoverage() {
-  // seu código aqui
+// const { species, employees } = data;
+// console.log(employees);
+
+function getEmployeesCoverage(employeeData = {}) {
+
 }
+
+// console.log(getEmployeesCoverage({ name: 'Burl' }));
 
 module.exports = getEmployeesCoverage;

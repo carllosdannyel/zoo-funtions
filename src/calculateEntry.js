@@ -5,15 +5,10 @@ const { child, adult, senior } = data.prices;
 function countEntrants(entrants) {
   const related = { adult: 0, child: 0, senior: 0 };
 
-  entrants.filter(({ age }) => {
-    if (age < 18) {
-      related.child += 1;
-    } else if (age >= 18 && age < 50) {
-      related.adult += 1;
-    } else {
-      related.senior += 1;
-    }
-    return related;
+  entrants.forEach(({ age }) => {
+    if (age < 18) related.child += 1;
+    if (age >= 18 && age < 50) related.adult += 1;
+    if (age >= 50) related.senior += 1;
   });
 
   return related;
