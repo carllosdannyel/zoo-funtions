@@ -51,7 +51,7 @@ const withoutParameter = () => employees.reduce((acc, curr) => {
 function getEmployeesCoverage(employeeData) {
   if (!employeeData) return withoutParameter();
   // if (employeeData.name || employeeData.id) return allEmployeeInformation(employeeData);
-  if (allInformation.includes(employeeData.id || employeeData.name) === false) {
+  if (!allInformation.includes(employeeData.id || employeeData.name)) {
     throw new Error('Informações inválidas');
   }
   try {
@@ -61,6 +61,6 @@ function getEmployeesCoverage(employeeData) {
   }
 }
 
-// console.log(getEmployeesCoverage({ name: 'aslkcnas' }));
+// console.log(getEmployeesCoverage());
 
 module.exports = getEmployeesCoverage;
